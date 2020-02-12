@@ -2,13 +2,13 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
-/[Ll]ibrary/
-/[Tt]emp/
-/[Oo]bj/
-/[Bb]uild/
-/[Bb]uilds/
-/[Ll]ogs/
-/[Mm]emoryCaptures/
+/Procedural-Landmass-Generation/[Ll]ibrary/
+/Procedural-Landmass-Generation/[Tt]emp/
+/Procedural-Landmass-Generation/[Oo]bj/
+/Procedural-Landmass-Generation/[Bb]uild/
+/Procedural-Landmass-Generation/[Bb]uilds/
+/Procedural-Landmass-Generation/[Ll]ogs/
+/Procedural-Landmass-Generation/[Mm]emoryCaptures/
 
 # Never ignore Asset meta data
 !/[Aa]ssets/**/*.meta

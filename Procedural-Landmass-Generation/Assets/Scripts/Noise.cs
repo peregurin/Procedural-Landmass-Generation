@@ -5,9 +5,18 @@ using UnityEngine;
 public static class Noise
 {
     
-    public static float[,] GenerateNoiseMap(int mapWidth, int mapHeight, float scale, int octaves, float persistance, float lacunarity)
+    public static float[,] GenerateNoiseMap(int mapWidth, int mapHeight, int seed, float scale, int octaves, float persistance, float lacunarity, Vector2 offset)
     {
         float[,] noiseMap = new float[mapWidth, mapHeight];
+        System.Random prng = new System.Random(seed);
+        Vector2[] octaveOffsets = new Vector2[octaves];
+        for(int i = 0; i < octaves; i++)
+        {
+            float offsetX = prng.Next(-100000, 100000) + offset.x;
+            float offsetY = prng.Next(-100000, 100000) + offset.y;
+            octaveOffsets[i] = new Vector2(offsetX, offsetY);
+        }
+
         if (scale <= 0)
         {
             scale = 0.0001f;
@@ -15,6 +24,9 @@ public static class Noise
 
         float maxNoiseHeight = float.MinValue;
         float minNoiseheight = float.MaxValue;
+
+        float halfWidth = mapWidth / 2f;
+        float halfHeight = mapHeight / 2f;
 
         for(int y = 0; y < mapHeight; y++)
         {
@@ -25,8 +37,8 @@ public static class Noise
                 float noiseHeight = 0;
                 for(int i = 0; i < octaves; i++)
                 {
-                    float sampleX = x / scale * frequency; //to get non-integer values in sample, cause the perlin value at integer is the same.
-                    float sampleY = y / scale * frequency;
+                    float sampleX = (x - halfWidth) / scale * frequency + octaveOffsets[i].x; //to get non-integer values in sample, cause the perlin value at integer is the same.
+                    float sampleY = (y - halfHeight) / scale * frequency + octaveOffsets[i].y;
 
                     float perlinValue = Mathf.PerlinNoise(sampleX, sampleY) * 2 - 1;
                     noiseHeight += perlinValue * amplitude;

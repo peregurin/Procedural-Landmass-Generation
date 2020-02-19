@@ -11,7 +11,7 @@ public class MapGenerator : MonoBehaviour
 
     public DrawMode drawMode;
 
-    const int mapChunckSize = 241;
+    public const int mapChunckSize = 241;
     [Range(0,6)]
     public int levelOfDetail;
     public float noiseScale;
